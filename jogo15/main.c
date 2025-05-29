@@ -6,10 +6,10 @@
 
 
 int jogo[4][4] = {
-    {0, 1, 2, 3},
-    {4, 5, 6, 7},
-    {8, 9, 10, 11},
-    {12, 13, 14, 15}
+    {1, 2, 3, 4},
+    {5, 6, 7, 8},
+    {9, 10, 11, 12},
+    {13, 14, 15, 0}
 };
 
 int posicao[2];
@@ -30,9 +30,10 @@ void posicaoDoZero(int posicao[2], int jogo[4][4]) {
 
 void resetJogo(int jogo[4][4]){
     //Faz com que o tabuleiro volte à ordem padrão
-    int ciclos=0;
+    int ciclos=1;
     for(int i=0;i<4;i++){
         for(int j=0;j<4;j++){
+            if(ciclos==16){ciclos=0;}
             jogo[i][j]=ciclos;
             ciclos++;
         }
@@ -133,9 +134,12 @@ void embaralharJogo(int jogo[4][4]) {
 
 bool verificarVitrotia(int jogo[4][4]){
     //verifica se o jogo está na ordem númerica que leva a vitória
-    int sequencia=0, ciclos=0;
+    int sequencia=0, ciclos=1;
     for(int i=0;i<4;i++){
         for(int j=0;j<4;j++){
+            if(ciclos==16){
+                ciclos=0;
+            }
             if(jogo[i][j]==ciclos){
                 sequencia++;
             }
@@ -155,7 +159,7 @@ void mostrarInstrucoes(){
     printf("Para jogar o jogo do 15 se faz necessario\nque voce ponha em ordem crescente os numeros embaralhados");
     printf("\nEis como o jogo deve ser organizado ao final: \n\n");
     mostrarJogo(jogo);
-    printf("\nO espaco vazio deve estar no inicio\n\n");
+    printf("\nO espaco vazio deve estar no final\n\n");
 }
 
 void mover(int jogo[4][4], int posicao[2],int numMovido){
